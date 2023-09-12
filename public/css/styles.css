@@ -11460,3 +11460,6 @@ min-width: 100px;
 .modal form label {
 font-weight: normal;
 }
+.error {
+  color: red;
+}

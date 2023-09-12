@@ -24,3 +24,43 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+
+$(function() {
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $('#save-attr-btn').click(function() {
+        let error = false;
+        if (!$('#attr-title').val()) {
+            $('#attr-title-error').text('Title cannot be blank');
+            error = true;
+        } else {
+            $('#attr-title-error').text('');
+        }
+
+        if (!$('#attr-value').val()) {
+            $('#attr-value-error').text('Values cannot be blank');
+            error = true;
+        } else {
+            $('#attr-value-error').text('');
+        }
+
+        if (error) {
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/attributes/store",
+            data: {
+                _token: CSRF_TOKEN,
+                title: $('#attr-title').val(),
+                values: $('#attr-value').val()
+            },
+            dataType: 'JSON',
+            success: function(resultData){
+                location.reload();
+            }
+      });
+        
+    })
+})

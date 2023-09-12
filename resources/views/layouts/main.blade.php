@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- provide the csrf token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
     </head>
     <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -29,9 +31,13 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-list-alt"></i></div>
                                 All Products
                             </a>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="{{ route('product.create') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
                                 Create Product
+                            </a>
+                            <a class="nav-link" href="{{ route('attribute.list') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                                Product Attributes
                             </a>
                         </div>
                     </div>
@@ -55,9 +61,6 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
     </body>

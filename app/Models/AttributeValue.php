@@ -11,6 +11,13 @@ class AttributeValue extends Model
 
     protected $primaryKey = 'id';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['value'];
+
     public function attribute()
     {
         return $this->belongsTo(Attribute::class);
