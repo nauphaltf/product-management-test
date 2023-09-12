@@ -7,6 +7,11 @@
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">List All Products</li>
         </ol>
+        @if (session('message'))
+			<div class="alert alert-success">
+				{{ session('message') }}
+			</div>
+		@endif
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
@@ -14,7 +19,7 @@
 						<h2>Product<b> List</b></h2>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
+						<a href="{{ route('product.create') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
 					</div>
                 </div>
             </div>
@@ -35,6 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse ($products as $product)
                     <tr>
 						<td>
 							<span class="custom-checkbox">
@@ -42,29 +48,24 @@
 								<label for="checkbox1"></label>
 							</span>
 						</td>
-                        <td>Thomas Hardy</td>
-                        <td>thomashardy@mail.com</td>
-						<td>89 Chiaroscuro Rd, Portland, USA</td>
-                        <td>(171) 555-2222</td>
+                        <td>{{ $product->title }}</td>
+                        <td>{{$product->description }}</td>
+						<td><img src="{{ $product->main_image }}" height="100" width="100" /></td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            @foreach ($product->attributes as $attribute)
+                            <div>{{ $attribute->attribute->title }} : {{ $attribute->value->value }}</div>
+                            @endforeach
+                        </td>
+                        <td>
+                            <a href="{{ route('product.edit', $product->id) }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="{{ route('product.delete', $product->id) }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
+                    @empty
+
+                    @endforelse
                 </tbody>
             </table>
-			<div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
-            </div>
         </div>
     </div>
 </main>

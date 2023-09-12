@@ -11,6 +11,13 @@ class ProductAttribute extends Model
 
     protected $primaryKey = 'id';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['attribute_id', 'value_id'];
+
     public function product()
     {
         return $this->belongsTo(Product::class);

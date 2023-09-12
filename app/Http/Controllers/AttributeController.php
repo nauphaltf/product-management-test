@@ -24,11 +24,6 @@ class AttributeController extends Controller
         ]);
     }
 
-    public function checkTitleExists(Request $request)
-    {
-
-    }
-
     public function create()
     {
         return view('attribute.create');

@@ -61,6 +61,37 @@ $(function() {
                 location.reload();
             }
       });
-        
+    });
+    
+    $('#product-image').on('change', function(event){
+        event.preventDefault();
+        $('#product-save-btn').attr('disabled', true);
+        var url = $('#image-upload-form').attr('action');
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: new FormData($('#image-upload-form')[0]),
+            dataType: 'JSON',
+            contentType: false,
+            cache: false,
+            processData: false,
+            success:function(response)
+            {
+                $('#demo-image').attr('src', response.image).show();
+                $('#image-path').val(response.image);
+                $('#product-save-btn').attr('disabled', false);
+            },
+            error: function(response) {
+                $('.error').remove();
+                $.each(response.responseJSON.errors, function(k, v) {
+                    $('[name=\"image\"]').after('<p class="error">'+v[0]+'</p>');
+                });
+            }
+        });
+    });
+
+    $('#product-save-btn').click(function() {
+        $('#product-form').submit();
     })
-})
+});

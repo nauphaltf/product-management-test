@@ -9,7 +9,7 @@ class AttributeRepository extends BaseRepository
 {
     public function getAttributes()
     {
-        $attributes = Attribute::all();
+        $attributes = Attribute::with('values')->get();
         
         return $attributes;
     }
